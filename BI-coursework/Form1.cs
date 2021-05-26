@@ -80,7 +80,7 @@ namespace BI_coursework
             ////load all the blank charts
             btnLoadDateData_Click(sender, e);
             ProductDateChanged(5);
-            ProductDateChanged(5);
+ //           ProductDateChanged(5);
             DateChanged(5);
             btnLoadCustomerData_Click(sender, e);
         }
@@ -1071,6 +1071,7 @@ namespace BI_coursework
             CustomersWithMostDiscounts(StartDate, EndDate, CustomerAmount);
             ProfitOnDate(StartDate, EndDate);
             ActiveCustomersByDate(StartDate, EndDate);
+            SalesOnDate(StartDate, EndDate);
         }
 
         private void monthCalendarCustomer_DateSelected(object sender, DateRangeEventArgs e)
@@ -1335,6 +1336,9 @@ namespace BI_coursework
             chartProfitOnDate.Visible = true;
             lblActiveCustomersByDate.Visible = true;
             chartActiveCustomersByDate.Visible = true;
+            datechart2.Visible = true;
+            DateChanged(5);
+            ProductDateChanged(5);
             // Preset the customer amount to 3
             CustomerDateChanged(Convert.ToInt32(numericUpDownCustomer.Text));
         }
@@ -1472,7 +1476,12 @@ namespace BI_coursework
             {
                 // Open the SQL connection
                 myConnection.Open();
-                SqlCommand command = new SqlCommand("SELECT Time.date AS Date, COUNT(DISTINCT productId) AS Products FROM FactTableEmpty JOIN Time ON FactTableEmpty.timeId = Time.id WHERE Time.date BETWEEN @StartDate AND @EndDate GROUP BY Time.date; ", myConnection);
+                SqlCommand command = new SqlCommand(
+                    "SELECT Time.date AS Date, COUNT(DISTINCT productId) AS Products FROM FactTableEmpty " +
+                    "JOIN Time ON FactTableEmpty.timeId = Time.id " +
+                    "WHERE Time.date BETWEEN @StartDate AND @EndDate " +
+                    "GROUP BY Time.date " +
+                    "ORDER BY Time.date ASC; ", myConnection);
                 command.Parameters.Add(new SqlParameter("@StartDate", StartDate));
                 command.Parameters.Add(new SqlParameter("@EndDate", EndDate));
 
@@ -1512,8 +1521,8 @@ namespace BI_coursework
         private void ProductDateChanged(Int32 ProductAmount)
         {
             // Get the selected date
-            string SelectedStart = Convert.ToString(dtpProductStart.Value);
-            string SelectedEnd = Convert.ToString(dtpProductEnd.Value);
+            string SelectedStart = Convert.ToString(monthCalendarCustomer.SelectionStart);
+            string SelectedEnd = Convert.ToString(monthCalendarCustomer.SelectionEnd);
 
             // Split date and time
             var SelectedStartSplit = SelectedStart.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
@@ -1543,76 +1552,67 @@ namespace BI_coursework
             MostProfitableProduct(StartDate, EndDate, ProductAmount);
             MostValuableProduct(StartDate, EndDate, ProductAmount);
             ActiveProductsByDate(StartDate, EndDate);
-        }
 
+        }
+/******************************************************/
         private void btnLoadProductData_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void btnLoadDateData_Click(object sender, EventArgs e)
-        {
-            // This is a hardcoded week - the lowest grade
-            // Ideally this range would come from your database or elsewhere to allow the user to pick which dates they want to see
-            // A good idea could be to create an empty list and then add in the week of dates you need
-            List<String> dateList = new List<String>(new String[] { "06/01/2014", "07/01/2014", "08/01/2014", "09/01/2014", "10/01/2014", "11/01/2014", "12/01/2014" });
+        private void btnLoadDateData_Click(object sender, EventArgs e) { }
 
-            // I need somewhere to hold the information pulled from the database, so this is an empty dictionary
-            // I am using a dictionary as I can then manually set my own "key"
-            // Rather than it being accessed through [0], [1], etc, I can access it via the date
-            // The dictionary type is string, int - date, number of sales
-            Dictionary<String, Int32> salesCount = new Dictionary<String, Int32>();
 
-            // create a connection to the mdf file. We only need this once so it is outside my loop
-            String connectionStringDestination = Properties.Settings.Default.DestinationDatabaseConnectionString;
+        private void SalesOnDate(string StartDate, string EndDate)
+        {  // Dictionary to store date and salesNumber
+            Dictionary<String, int> salesCount = new Dictionary<String, int>();
 
-            //Run this code once for each date in my list - in my case 7 times
-            foreach (String date in dateList)
+            // Create a connection to the MDF file
+            string connectionStringDestination = Properties.Settings.Default.DestinationDatabaseConnectionString;
+
+            // Connect to the database using previous string
+            using (SqlConnection myConnection = new SqlConnection(connectionStringDestination))
             {
-                // Split the date down and assign it to variables for later use
-                String[] arrayDate = date.Split('/');
-                Int32 year = Convert.ToInt32(arrayDate[2]);
-                Int32 month = Convert.ToInt32(arrayDate[1]);
-                Int32 day = Convert.ToInt32(arrayDate[0]);
+                // Open the SQL connection
+                myConnection.Open();
+                SqlCommand command = new SqlCommand(
+                    "SELECT Time.date AS Date, COUNT(Time.date) AS SalesNumber "
+                    + "FROM FactTableEmpty JOIN Time ON FactTableEmpty.timeId = Time.id "
+                    + "WHERE (date >= @StartDate) "
+                    + "AND (date <= @EndDate) "
+                    + "GROUP BY Time.date "
+                    + "ORDER BY Time.date ASC"
+                    , myConnection);
+                command.Parameters.Add(new SqlParameter("@StartDate", StartDate));
+                command.Parameters.Add(new SqlParameter("@EndDate", EndDate));
 
-                DateTime myDate = new DateTime(year, month, day);
-
-                // convert this to a database friendly format
-                string dbDate = myDate.ToString("M/dd/yyyy");
-
-                // Connect to the database using previous string
-                using (SqlConnection myConnection = new SqlConnection(connectionStringDestination))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    // Open the SQL connection
-                    myConnection.Open();
-                    SqlCommand command = new SqlCommand("SELECT COUNT(*) as SalesNumber FROM FactTableEmpty JOIN Time " +
-                        " ON FactTableEmpty.timeId = Time.id WHERE Time.date = @date;", myConnection);
-                    // Add data to the previous command
-                    command.Parameters.Add(new SqlParameter("@date", dbDate));
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    // If there are rows it means there is data
+                    if (reader.HasRows)
                     {
-                        if (reader.HasRows) // check if there are any results
+                        // Make charts visible
+                        datechart2.Visible = true;
+                        // Read the results
+                        while (reader.Read())
                         {
-                            // Make charts visible
-                           // datechart1.Visible = true;
-                            datechart2.Visible = true;
+                            // Split date and time
+                            var Date = reader["Date"].ToString();
+                            var salesNo = Convert.ToInt32(reader["SalesNumber"]);
+                            var SplitDate = Date.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-                            while (reader.Read()) // there are results, so read them out
-                            {
-                                // add the numberof sales on this date
-                                salesCount.Add(date, Int32.Parse(reader["SalesNumber"].ToString()));
-                            }
-                        }
-                        else // there were no resuls
-                        {
-                            // there were 0 sales on this date
-                            salesCount.Add(date, 0);
+                            // Add the SalesNumber for this date
+                            salesCount.Add(SplitDate[0], salesNo);
                         }
                     }
+                    // If there was no data
+                    else
+                    {
+                        salesCount.Add("No data found", 0);
+                    }
                 }
-
             }
+        
 
             // End of the foreach loop. We now have a (hopefully) filled array
 
@@ -1693,19 +1693,19 @@ namespace BI_coursework
 
         private void DateChanged(Int32 RegionProfit)
         {
-            //get selected date
-            string Start = Convert.ToString(dtpStartDate.Value);
-            string End = Convert.ToString(dtpEndDate.Value);
+            // Get the selected date
+            string SelectedStart = Convert.ToString(monthCalendarCustomer.SelectionStart);
+            string SelectedEnd = Convert.ToString(monthCalendarCustomer.SelectionEnd);
 
-            //split date and time
-            var StartSplit = Start.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-            var EndSplit = End.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+            // Split date and time
+            var SelectedStartSplit = SelectedStart.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+            var SelectedEndSplit = SelectedEnd.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-            //new array with D/M/Y split
-            string[] arrayStart = StartSplit[0].Split('/');
-            string[] arrayEnd = EndSplit[0].Split('/');
+            // New array with D/M/Y split
+            string[] arrayStart = SelectedStartSplit[0].Split('/');
+            string[] arrayEnd = SelectedEndSplit[0].Split('/');
 
-            //assign to the appropriate variables
+            // Assign to the appropriate variables
             Int32 StartYear = Convert.ToInt32(arrayStart[2]);
             Int32 StartMonth = Convert.ToInt32(arrayStart[1]);
             Int32 StartDay = Convert.ToInt32(arrayStart[0]);
@@ -1717,7 +1717,7 @@ namespace BI_coursework
             DateTime StartingDate = new DateTime(StartYear, StartMonth, StartDay);
             DateTime EndingDate = new DateTime(EndYear, EndMonth, EndDay);
 
-            //convert this to database format
+            // Convert this to a database friendly format
             string StartDate = StartingDate.ToString("MM/dd/yyyy");
             string EndDate = EndingDate.ToString("MM/dd/yyyy");
 
@@ -1755,7 +1755,7 @@ namespace BI_coursework
             //load all the data
             btnLoadDateData_Click(sender, e);
             ProductDateChanged(5);
-            ProductDateChanged(5);
+//            ProductDateChanged(5);
             DateChanged(5);
             btnLoadCustomerData_Click(sender, e);
         }
@@ -1783,6 +1783,41 @@ namespace BI_coursework
         private void lblGetProgress_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReloadCustomers_Click(object sender, EventArgs e)
+        {
+            CustomerDateChanged(Convert.ToInt32(numericUpDownCustomer.Text));
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel2.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel3.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel4.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel6.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel5.ClientRectangle, Color.LightSteelBlue, ButtonBorderStyle.Solid);
         }
     }
 }

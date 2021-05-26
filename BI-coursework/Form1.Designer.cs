@@ -59,28 +59,23 @@
             System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabCustomerDashboard = new System.Windows.Forms.TabPage();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.monthCalendarCustomer = new System.Windows.Forms.MonthCalendar();
+            this.btnLoadCustomerData = new System.Windows.Forms.Button();
+            this.lblCustomerSelectDate = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.chartMostProfitableProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartMostValuableProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnLoadProductData = new System.Windows.Forms.Button();
-            this.labelInstructionProdDate = new System.Windows.Forms.Label();
-            this.dtpProductStart = new System.Windows.Forms.DateTimePicker();
-            this.dtpProductEnd = new System.Windows.Forms.DateTimePicker();
-            this.labelToProdDate = new System.Windows.Forms.Label();
             this.chartProductByDate = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.crtRegionSales = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.btnLoadData = new System.Windows.Forms.Button();
-            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.chartActiveCustomersByDate = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -94,14 +89,12 @@
             this.datechart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblSalesOverview = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.monthCalendarCustomer = new System.Windows.Forms.MonthCalendar();
+            this.btnReloadCustomers = new System.Windows.Forms.Button();
             this.lblTopCustomers = new System.Windows.Forms.Label();
             this.chartMostProfitableCustomers = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblCustomerAmount = new System.Windows.Forms.Label();
-            this.lblCustomerSelectDate = new System.Windows.Forms.Label();
             this.lblCustomersWithMostDiscounts = new System.Windows.Forms.Label();
             this.numericUpDownCustomer = new System.Windows.Forms.NumericUpDown();
-            this.btnLoadCustomerData = new System.Windows.Forms.Button();
             this.lblMostProfitableCustomers = new System.Windows.Forms.Label();
             this.chartCustomersWithMostDiscounts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -133,6 +126,7 @@
             this.listBoxProducts = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCustomerDashboard.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartMostProfitableProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMostValuableProducts)).BeginInit();
@@ -156,6 +150,7 @@
             // 
             // tabCustomerDashboard
             // 
+            this.tabCustomerDashboard.Controls.Add(this.panel8);
             this.tabCustomerDashboard.Controls.Add(this.label10);
             this.tabCustomerDashboard.Controls.Add(this.panel6);
             this.tabCustomerDashboard.Controls.Add(this.panel5);
@@ -173,6 +168,47 @@
             this.tabCustomerDashboard.UseVisualStyleBackColor = true;
             this.tabCustomerDashboard.Click += new System.EventHandler(this.tabCustomerDashboard_Click);
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.monthCalendarCustomer);
+            this.panel8.Controls.Add(this.btnLoadCustomerData);
+            this.panel8.Controls.Add(this.lblCustomerSelectDate);
+            this.panel8.Location = new System.Drawing.Point(20, 25);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(326, 361);
+            this.panel8.TabIndex = 46;
+            // 
+            // monthCalendarCustomer
+            // 
+            this.monthCalendarCustomer.Location = new System.Drawing.Point(14, 76);
+            this.monthCalendarCustomer.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.monthCalendarCustomer.MaxSelectionCount = 31;
+            this.monthCalendarCustomer.Name = "monthCalendarCustomer";
+            this.monthCalendarCustomer.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(2014, 1, 1, 0, 0, 0, 0), new System.DateTime(2014, 1, 31, 0, 0, 0, 0));
+            this.monthCalendarCustomer.TabIndex = 28;
+            this.monthCalendarCustomer.TodayDate = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
+            this.monthCalendarCustomer.Visible = false;
+            // 
+            // btnLoadCustomerData
+            // 
+            this.btnLoadCustomerData.Location = new System.Drawing.Point(17, 296);
+            this.btnLoadCustomerData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLoadCustomerData.Name = "btnLoadCustomerData";
+            this.btnLoadCustomerData.Size = new System.Drawing.Size(259, 25);
+            this.btnLoadCustomerData.TabIndex = 0;
+            this.btnLoadCustomerData.Text = "Reload";
+            this.btnLoadCustomerData.UseVisualStyleBackColor = true;
+            this.btnLoadCustomerData.Click += new System.EventHandler(this.btnLoadCustomerData_Click);
+            // 
+            // lblCustomerSelectDate
+            // 
+            this.lblCustomerSelectDate.Location = new System.Drawing.Point(29, 42);
+            this.lblCustomerSelectDate.Name = "lblCustomerSelectDate";
+            this.lblCustomerSelectDate.Size = new System.Drawing.Size(265, 23);
+            this.lblCustomerSelectDate.TabIndex = 33;
+            this.lblCustomerSelectDate.Text = "Hold and drag curser to select a period:";
+            this.lblCustomerSelectDate.Visible = false;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -186,31 +222,25 @@
             // 
             // panel6
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.label9);
             this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label7);
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.label4);
             this.panel6.Controls.Add(this.chartMostProfitableProducts);
             this.panel6.Controls.Add(this.chartMostValuableProducts);
-            this.panel6.Controls.Add(this.btnLoadProductData);
-            this.panel6.Controls.Add(this.labelInstructionProdDate);
-            this.panel6.Controls.Add(this.dtpProductStart);
-            this.panel6.Controls.Add(this.dtpProductEnd);
-            this.panel6.Controls.Add(this.labelToProdDate);
             this.panel6.Controls.Add(this.chartProductByDate);
             this.panel6.Location = new System.Drawing.Point(389, 420);
             this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1055, 363);
             this.panel6.TabIndex = 43;
+            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
             // 
             // label9
             // 
             this.label9.BackColor = System.Drawing.Color.White;
             this.label9.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label9.Location = new System.Drawing.Point(703, 124);
+            this.label9.Location = new System.Drawing.Point(705, 82);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(333, 20);
             this.label9.TabIndex = 42;
@@ -221,28 +251,19 @@
             // 
             this.label8.BackColor = System.Drawing.Color.White;
             this.label8.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label8.Location = new System.Drawing.Point(355, 128);
+            this.label8.Location = new System.Drawing.Point(357, 86);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(331, 20);
             this.label8.TabIndex = 41;
             this.label8.Text = "Profit Per Product";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(224, 84);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 17);
-            this.label7.TabIndex = 40;
-            this.label7.Text = "From";
-            // 
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label6.Location = new System.Drawing.Point(15, 130);
+            this.label6.Location = new System.Drawing.Point(17, 88);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(331, 17);
             this.label6.TabIndex = 39;
@@ -276,7 +297,7 @@
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.chartMostProfitableProducts.Legends.Add(legend1);
-            this.chartMostProfitableProducts.Location = new System.Drawing.Point(355, 153);
+            this.chartMostProfitableProducts.Location = new System.Drawing.Point(357, 111);
             this.chartMostProfitableProducts.Margin = new System.Windows.Forms.Padding(4);
             this.chartMostProfitableProducts.Name = "chartMostProfitableProducts";
             series1.ChartArea = "ChartArea1";
@@ -301,7 +322,7 @@
             legend2.Enabled = false;
             legend2.Name = "Legend1";
             this.chartMostValuableProducts.Legends.Add(legend2);
-            this.chartMostValuableProducts.Location = new System.Drawing.Point(15, 153);
+            this.chartMostValuableProducts.Location = new System.Drawing.Point(17, 111);
             this.chartMostValuableProducts.Margin = new System.Windows.Forms.Padding(4);
             this.chartMostValuableProducts.Name = "chartMostValuableProducts";
             series2.BorderWidth = 2;
@@ -314,54 +335,6 @@
             this.chartMostValuableProducts.Size = new System.Drawing.Size(331, 181);
             this.chartMostValuableProducts.TabIndex = 32;
             this.chartMostValuableProducts.Text = "chart1";
-            // 
-            // btnLoadProductData
-            // 
-            this.btnLoadProductData.Location = new System.Drawing.Point(667, 82);
-            this.btnLoadProductData.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLoadProductData.Name = "btnLoadProductData";
-            this.btnLoadProductData.Size = new System.Drawing.Size(107, 25);
-            this.btnLoadProductData.TabIndex = 29;
-            this.btnLoadProductData.Text = "Reload";
-            this.btnLoadProductData.UseVisualStyleBackColor = true;
-            this.btnLoadProductData.Click += new System.EventHandler(this.btnLoadProductData_Click_1);
-            // 
-            // labelInstructionProdDate
-            // 
-            this.labelInstructionProdDate.AutoSize = true;
-            this.labelInstructionProdDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInstructionProdDate.Location = new System.Drawing.Point(224, 57);
-            this.labelInstructionProdDate.Name = "labelInstructionProdDate";
-            this.labelInstructionProdDate.Size = new System.Drawing.Size(437, 17);
-            this.labelInstructionProdDate.TabIndex = 36;
-            this.labelInstructionProdDate.Text = "Select the date range and click load data to display charts and data.";
-            // 
-            // dtpProductStart
-            // 
-            this.dtpProductStart.Location = new System.Drawing.Point(273, 82);
-            this.dtpProductStart.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpProductStart.Name = "dtpProductStart";
-            this.dtpProductStart.Size = new System.Drawing.Size(175, 22);
-            this.dtpProductStart.TabIndex = 30;
-            this.dtpProductStart.Value = new System.DateTime(2014, 1, 1, 20, 10, 0, 0);
-            // 
-            // dtpProductEnd
-            // 
-            this.dtpProductEnd.Location = new System.Drawing.Point(489, 82);
-            this.dtpProductEnd.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpProductEnd.Name = "dtpProductEnd";
-            this.dtpProductEnd.Size = new System.Drawing.Size(168, 22);
-            this.dtpProductEnd.TabIndex = 31;
-            this.dtpProductEnd.Value = new System.DateTime(2014, 1, 30, 20, 10, 0, 0);
-            // 
-            // labelToProdDate
-            // 
-            this.labelToProdDate.AutoSize = true;
-            this.labelToProdDate.Location = new System.Drawing.Point(455, 85);
-            this.labelToProdDate.Name = "labelToProdDate";
-            this.labelToProdDate.Size = new System.Drawing.Size(25, 17);
-            this.labelToProdDate.TabIndex = 34;
-            this.labelToProdDate.Text = "To";
             // 
             // chartProductByDate
             // 
@@ -378,7 +351,7 @@
             legend3.Enabled = false;
             legend3.Name = "Legend1";
             this.chartProductByDate.Legends.Add(legend3);
-            this.chartProductByDate.Location = new System.Drawing.Point(707, 153);
+            this.chartProductByDate.Location = new System.Drawing.Point(709, 111);
             this.chartProductByDate.Margin = new System.Windows.Forms.Padding(4);
             this.chartProductByDate.Name = "chartProductByDate";
             series3.BorderWidth = 2;
@@ -394,24 +367,21 @@
             // 
             // panel5
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.crtRegionSales);
-            this.panel5.Controls.Add(this.dtpEndDate);
-            this.panel5.Controls.Add(this.btnLoadData);
-            this.panel5.Controls.Add(this.dtpStartDate);
             this.panel5.Location = new System.Drawing.Point(1450, 420);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(459, 363);
             this.panel5.TabIndex = 42;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label5.Location = new System.Drawing.Point(66, 126);
+            this.label5.Location = new System.Drawing.Point(77, 84);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(331, 23);
             this.label5.TabIndex = 43;
@@ -442,7 +412,7 @@
             legend4.Enabled = false;
             legend4.Name = "Legend1";
             this.crtRegionSales.Legends.Add(legend4);
-            this.crtRegionSales.Location = new System.Drawing.Point(69, 153);
+            this.crtRegionSales.Location = new System.Drawing.Point(80, 111);
             this.crtRegionSales.Margin = new System.Windows.Forms.Padding(4);
             this.crtRegionSales.Name = "crtRegionSales";
             series4.ChartArea = "Most Profitable Region";
@@ -456,38 +426,8 @@
             title1.Name = "Title1";
             this.crtRegionSales.Titles.Add(title1);
             // 
-            // dtpEndDate
-            // 
-            this.dtpEndDate.Location = new System.Drawing.Point(194, 85);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(167, 22);
-            this.dtpEndDate.TabIndex = 41;
-            this.dtpEndDate.Value = new System.DateTime(2014, 1, 31, 0, 0, 0, 0);
-            // 
-            // btnLoadData
-            // 
-            this.btnLoadData.Location = new System.Drawing.Point(369, 84);
-            this.btnLoadData.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(76, 26);
-            this.btnLoadData.TabIndex = 38;
-            this.btnLoadData.Text = "Reload";
-            this.btnLoadData.UseVisualStyleBackColor = true;
-            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click_1);
-            // 
-            // dtpStartDate
-            // 
-            this.dtpStartDate.Location = new System.Drawing.Point(17, 85);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(169, 22);
-            this.dtpStartDate.TabIndex = 40;
-            this.dtpStartDate.Value = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
-            // 
             // panel4
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.chartActiveCustomersByDate);
             this.panel4.Controls.Add(this.lblActiveCustomersByDate);
@@ -496,6 +436,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(359, 363);
             this.panel4.TabIndex = 28;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // label2
             // 
@@ -506,7 +447,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(331, 23);
             this.label2.TabIndex = 29;
-            this.label2.Text = "CUSTOMERS";
+            this.label2.Text = "TOP CUSTOMERS";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chartActiveCustomersByDate
@@ -537,7 +478,7 @@
             series5.Name = "Customers";
             series5.YValuesPerPoint = 4;
             this.chartActiveCustomersByDate.Series.Add(series5);
-            this.chartActiveCustomersByDate.Size = new System.Drawing.Size(329, 191);
+            this.chartActiveCustomersByDate.Size = new System.Drawing.Size(331, 193);
             this.chartActiveCustomersByDate.TabIndex = 2;
             this.chartActiveCustomersByDate.Text = "Active Customers By Date";
             this.chartActiveCustomersByDate.Visible = false;
@@ -552,7 +493,7 @@
             this.lblActiveCustomersByDate.Location = new System.Drawing.Point(13, 74);
             this.lblActiveCustomersByDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblActiveCustomersByDate.Name = "lblActiveCustomersByDate";
-            this.lblActiveCustomersByDate.Size = new System.Drawing.Size(329, 22);
+            this.lblActiveCustomersByDate.Size = new System.Drawing.Size(331, 22);
             this.lblActiveCustomersByDate.TabIndex = 12;
             this.lblActiveCustomersByDate.Text = "Number of Active Customers over Time";
             this.lblActiveCustomersByDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -560,15 +501,15 @@
             // 
             // panel3
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.PROFIT);
             this.panel3.Controls.Add(this.lblProfitOnDate);
             this.panel3.Controls.Add(this.chartProfitOnDate);
-            this.panel3.Location = new System.Drawing.Point(389, 22);
+            this.panel3.Location = new System.Drawing.Point(717, 25);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(359, 361);
             this.panel3.TabIndex = 27;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // PROFIT
             // 
@@ -591,7 +532,7 @@
             this.lblProfitOnDate.Location = new System.Drawing.Point(13, 58);
             this.lblProfitOnDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProfitOnDate.Name = "lblProfitOnDate";
-            this.lblProfitOnDate.Size = new System.Drawing.Size(329, 22);
+            this.lblProfitOnDate.Size = new System.Drawing.Size(331, 22);
             this.lblProfitOnDate.TabIndex = 21;
             this.lblProfitOnDate.Text = "Profit Trends over Time";
             this.lblProfitOnDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -626,22 +567,23 @@
             series6.Name = "Profit";
             series6.YValuesPerPoint = 4;
             this.chartProfitOnDate.Series.Add(series6);
-            this.chartProfitOnDate.Size = new System.Drawing.Size(329, 181);
+            this.chartProfitOnDate.Size = new System.Drawing.Size(331, 181);
             this.chartProfitOnDate.TabIndex = 19;
             this.chartProfitOnDate.Text = "Profit On Date";
             this.chartProfitOnDate.Visible = false;
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.datechart2);
             this.panel2.Controls.Add(this.lblSalesOverview);
-            this.panel2.Location = new System.Drawing.Point(20, 22);
+            this.panel2.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.Location = new System.Drawing.Point(352, 25);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(359, 361);
             this.panel2.TabIndex = 26;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label1
             // 
@@ -682,7 +624,7 @@
             series7.Name = "Sales";
             series7.YValuesPerPoint = 4;
             this.datechart2.Series.Add(series7);
-            this.datechart2.Size = new System.Drawing.Size(299, 181);
+            this.datechart2.Size = new System.Drawing.Size(301, 183);
             this.datechart2.TabIndex = 27;
             this.datechart2.Text = "No of Sales over Time";
             this.datechart2.Visible = false;
@@ -701,33 +643,30 @@
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.monthCalendarCustomer);
+            this.panel1.Controls.Add(this.btnReloadCustomers);
             this.panel1.Controls.Add(this.lblTopCustomers);
             this.panel1.Controls.Add(this.chartMostProfitableCustomers);
             this.panel1.Controls.Add(this.lblCustomerAmount);
-            this.panel1.Controls.Add(this.lblCustomerSelectDate);
             this.panel1.Controls.Add(this.lblCustomersWithMostDiscounts);
             this.panel1.Controls.Add(this.numericUpDownCustomer);
-            this.panel1.Controls.Add(this.btnLoadCustomerData);
             this.panel1.Controls.Add(this.lblMostProfitableCustomers);
             this.panel1.Controls.Add(this.chartCustomersWithMostDiscounts);
-            this.panel1.Location = new System.Drawing.Point(760, 22);
+            this.panel1.Location = new System.Drawing.Point(1085, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1148, 361);
+            this.panel1.Size = new System.Drawing.Size(823, 361);
             this.panel1.TabIndex = 25;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // monthCalendarCustomer
+            // btnReloadCustomers
             // 
-            this.monthCalendarCustomer.Location = new System.Drawing.Point(12, 94);
-            this.monthCalendarCustomer.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
-            this.monthCalendarCustomer.MaxSelectionCount = 31;
-            this.monthCalendarCustomer.Name = "monthCalendarCustomer";
-            this.monthCalendarCustomer.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(2014, 1, 1, 0, 0, 0, 0), new System.DateTime(2014, 1, 31, 0, 0, 0, 0));
-            this.monthCalendarCustomer.TabIndex = 28;
-            this.monthCalendarCustomer.TodayDate = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
-            this.monthCalendarCustomer.Visible = false;
+            this.btnReloadCustomers.Location = new System.Drawing.Point(526, 316);
+            this.btnReloadCustomers.Name = "btnReloadCustomers";
+            this.btnReloadCustomers.Size = new System.Drawing.Size(75, 23);
+            this.btnReloadCustomers.TabIndex = 35;
+            this.btnReloadCustomers.Text = "Reload";
+            this.btnReloadCustomers.UseVisualStyleBackColor = true;
+            this.btnReloadCustomers.Click += new System.EventHandler(this.btnReloadCustomers_Click);
             // 
             // lblTopCustomers
             // 
@@ -754,7 +693,7 @@
             legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend8.Name = "Legend1";
             this.chartMostProfitableCustomers.Legends.Add(legend8);
-            this.chartMostProfitableCustomers.Location = new System.Drawing.Point(296, 94);
+            this.chartMostProfitableCustomers.Location = new System.Drawing.Point(22, 94);
             this.chartMostProfitableCustomers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartMostProfitableCustomers.Name = "chartMostProfitableCustomers";
             this.chartMostProfitableCustomers.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
@@ -769,35 +708,26 @@
             series9.Name = "Sales";
             this.chartMostProfitableCustomers.Series.Add(series8);
             this.chartMostProfitableCustomers.Series.Add(series9);
-            this.chartMostProfitableCustomers.Size = new System.Drawing.Size(563, 207);
+            this.chartMostProfitableCustomers.Size = new System.Drawing.Size(507, 207);
             this.chartMostProfitableCustomers.TabIndex = 26;
             this.chartMostProfitableCustomers.Text = "Most Profitable Customers";
             this.chartMostProfitableCustomers.Visible = false;
             // 
             // lblCustomerAmount
             // 
-            this.lblCustomerAmount.Location = new System.Drawing.Point(9, 312);
+            this.lblCustomerAmount.Location = new System.Drawing.Point(254, 318);
             this.lblCustomerAmount.Name = "lblCustomerAmount";
             this.lblCustomerAmount.Size = new System.Drawing.Size(205, 23);
             this.lblCustomerAmount.TabIndex = 32;
             this.lblCustomerAmount.Text = "Display number of customers:";
             this.lblCustomerAmount.Visible = false;
             // 
-            // lblCustomerSelectDate
-            // 
-            this.lblCustomerSelectDate.Location = new System.Drawing.Point(9, 73);
-            this.lblCustomerSelectDate.Name = "lblCustomerSelectDate";
-            this.lblCustomerSelectDate.Size = new System.Drawing.Size(265, 23);
-            this.lblCustomerSelectDate.TabIndex = 33;
-            this.lblCustomerSelectDate.Text = "Hold and drag curser to select a period:";
-            this.lblCustomerSelectDate.Visible = false;
-            // 
             // lblCustomersWithMostDiscounts
             // 
             this.lblCustomersWithMostDiscounts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomersWithMostDiscounts.BackColor = System.Drawing.Color.White;
             this.lblCustomersWithMostDiscounts.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblCustomersWithMostDiscounts.Location = new System.Drawing.Point(855, 62);
+            this.lblCustomersWithMostDiscounts.Location = new System.Drawing.Point(526, 52);
             this.lblCustomersWithMostDiscounts.Name = "lblCustomersWithMostDiscounts";
             this.lblCustomersWithMostDiscounts.Size = new System.Drawing.Size(252, 18);
             this.lblCustomersWithMostDiscounts.TabIndex = 31;
@@ -807,7 +737,7 @@
             // 
             // numericUpDownCustomer
             // 
-            this.numericUpDownCustomer.Location = new System.Drawing.Point(220, 311);
+            this.numericUpDownCustomer.Location = new System.Drawing.Point(465, 317);
             this.numericUpDownCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDownCustomer.Maximum = new decimal(new int[] {
             10,
@@ -829,26 +759,15 @@
             0});
             this.numericUpDownCustomer.Visible = false;
             // 
-            // btnLoadCustomerData
-            // 
-            this.btnLoadCustomerData.Location = new System.Drawing.Point(274, 310);
-            this.btnLoadCustomerData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLoadCustomerData.Name = "btnLoadCustomerData";
-            this.btnLoadCustomerData.Size = new System.Drawing.Size(83, 25);
-            this.btnLoadCustomerData.TabIndex = 0;
-            this.btnLoadCustomerData.Text = "Reload";
-            this.btnLoadCustomerData.UseVisualStyleBackColor = true;
-            this.btnLoadCustomerData.Click += new System.EventHandler(this.btnLoadCustomerData_Click);
-            // 
             // lblMostProfitableCustomers
             // 
             this.lblMostProfitableCustomers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMostProfitableCustomers.BackColor = System.Drawing.Color.White;
             this.lblMostProfitableCustomers.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.lblMostProfitableCustomers.Location = new System.Drawing.Point(305, 60);
+            this.lblMostProfitableCustomers.Location = new System.Drawing.Point(76, 50);
             this.lblMostProfitableCustomers.Name = "lblMostProfitableCustomers";
-            this.lblMostProfitableCustomers.Size = new System.Drawing.Size(540, 18);
+            this.lblMostProfitableCustomers.Size = new System.Drawing.Size(440, 18);
             this.lblMostProfitableCustomers.TabIndex = 27;
             this.lblMostProfitableCustomers.Text = "Profit and Sales Per Customer";
             this.lblMostProfitableCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -867,7 +786,7 @@
             legend9.Enabled = false;
             legend9.Name = "Legend1";
             this.chartCustomersWithMostDiscounts.Legends.Add(legend9);
-            this.chartCustomersWithMostDiscounts.Location = new System.Drawing.Point(865, 94);
+            this.chartCustomersWithMostDiscounts.Location = new System.Drawing.Point(535, 94);
             this.chartCustomersWithMostDiscounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartCustomersWithMostDiscounts.Name = "chartCustomersWithMostDiscounts";
             series10.ChartArea = "ChartArea1";
@@ -917,7 +836,7 @@
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel7.BackColor = System.Drawing.SystemColors.Menu;
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.listBoxFactTable);
             this.panel7.Controls.Add(this.lblBuildProgress);
@@ -1230,8 +1149,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabCustomerDashboard.ResumeLayout(false);
             this.tabCustomerDashboard.PerformLayout();
+            this.panel8.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartMostProfitableProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMostValuableProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartProductByDate)).EndInit();
@@ -1262,17 +1181,9 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartMostProfitableProducts;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartMostValuableProducts;
-        private System.Windows.Forms.Button btnLoadProductData;
-        private System.Windows.Forms.Label labelInstructionProdDate;
-        private System.Windows.Forms.DateTimePicker dtpProductStart;
-        private System.Windows.Forms.DateTimePicker dtpProductEnd;
-        private System.Windows.Forms.Label labelToProdDate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartProductByDate;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataVisualization.Charting.Chart crtRegionSales;
-        private System.Windows.Forms.DateTimePicker dtpEndDate;
-        private System.Windows.Forms.Button btnLoadData;
-        private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartActiveCustomersByDate;
@@ -1323,7 +1234,6 @@
         private System.Windows.Forms.ListBox listBoxProductsDimension;
         private System.Windows.Forms.ListBox listBoxProducts;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -1332,5 +1242,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btnReloadCustomers;
+        private System.Windows.Forms.Panel panel8;
     }
 }
